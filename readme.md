@@ -1,7 +1,3 @@
-Below is an updated `README.md` for your Go-based Pusher alternative, "Gusher," hosted on GitHub at `https://github.com/imerfanahmed/gusher`. I’ve removed all load testing-related information (e.g., k6 references) as requested and tailored the content to reflect your project’s current state, including the GitHub repository link. This version focuses on the project’s overview, features, installation, usage, configuration, contributing, licensing, and support.
-
----
-
 # Gusher - A Go-Based Real-Time WebSocket Server (Pusher Alternative)
 
 Welcome to Gusher, a lightweight, Go-based real-time WebSocket server designed as an alternative to Pusher Channels. Gusher enables developers to build scalable, real-time applications with features like channel subscriptions, event broadcasting, and app management, mimicking Pusher’s functionality while offering flexibility and control through Go.
@@ -23,7 +19,6 @@ Welcome to Gusher, a lightweight, Go-based real-time WebSocket server designed a
     - [Reporting Issues](#reporting-issues)
   - [License](#license)
   - [Support](#support)
-    - [Notes](#notes)
 
 ## Overview
 Gusher is a Go-based server that provides real-time communication through WebSockets, supporting Pusher-like protocols for subscribing to channels, broadcasting events, and managing applications. It includes a WebUI for app management, channel debugging, and event logging, making it ideal for developers building chat applications, live updates, or collaborative tools.
@@ -150,12 +145,3 @@ Gusher is licensed under the MIT License. See the `LICENSE` file for details.
 - **Issues**: Use [GitHub Issues](https://github.com/imerfanahmed/gusher/issues).
 - **Community**: Join discussions on [GitHub Discussions](https://github.com/imerfanahmed/gusher/discussions) (to be set up).
 - **Documentation**: Refer to this README and in-code comments for usage.
-
----
-
-### Notes
-- This `README.md` reflects your project’s current state on GitHub, with the repository URL `https://github.com/imerfanahmed/gusher`.
-- Ensure a `LICENSE` file exists in your repository with the MIT License text.
-- You can expand sections (e.g., API Endpoints, Usage) with more details as your project evolves or add links to additional documentation.
-
-Let me know if you’d like to refine any sections or add more specific details!
