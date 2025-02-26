@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusher-Like WebUI - Event Logger & Debugging</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Pusher-Like Real-Time Dashboard</h1>
+    </header>
+    <nav>
+        <button id="appsBtn">Apps</button>
+        <button id="channelsBtn">Channels</button>
+        <button id="eventsBtn">Events</button>
+        <button id="debugBtn">Debug Console</button>
+    </nav>
+    <main>
+        <section id="appsSection" class="tab-content">
+            <h2>Manage Applications</h2>
+            <form id="createAppForm">
+                <input type="text" id="appKey" placeholder="App Key" required>
+                <input type="text" id="appSecret" placeholder="App Secret" required>
+                <input type="text" id="appID" placeholder="App ID" required>
+                <button type="submit">Create App</button>
+            </form>
+            <ul id="appList"></ul>
+        </section>
+        <section id="channelsSection" class="tab-content" style="display: none;">
+            <h2>Channel Debugging</h2>
+            <input type="text" id="channelFilter" placeholder="Filter channels...">
+            <ul id="channelList"></ul>
+        </section>
+        <section id="eventsSection" class="tab-content" style="display: none;">
+            <h2>Event Logger</h2>
+            <input type="text" id="eventFilter" placeholder="Filter events...">
+            <ul id="eventLog"></ul>
+        </section>
+        <section id="debugSection" class="tab-content" style="display: none;">
+            <h2>Debug Console</h2>
+            <input type="text" id="debugChannel" placeholder="Channel Name" required>
+            <input type="text" id="debugEvent" placeholder="Event Name" required>
+            <textarea id="debugData" placeholder="Event Data (JSON)"></textarea>
+            <button id="triggerEvent">Trigger Event</button>
+            <div id="debugOutput"></div>
+        </section>
+    </main>
+    <script src="https://js.pusher.com/8.3.0/pusher.min.js"></script> <!-- For WebSocket client -->
+    <script src="script.js"></script>
+</body>
+</html>
