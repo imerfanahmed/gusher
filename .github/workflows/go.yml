@@ -10,7 +10,7 @@ on:
 
 # Environment variables for reusability
 env:
-  GO_VERSION: '1.20' # Adjust to your project's Go version
+  GO_VERSION: '1.23' # Adjust to your project's Go version
 
 # Jobs to execute
 jobs:
