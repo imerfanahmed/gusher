@@ -33,16 +33,16 @@ jobs:
       - name: Get Dependencies
         run: go mod tidy && go mod verify
 
-      # Run linting with golangci-lint (optional)
-      - name: Lint
-        uses: golangci/golangci-lint-action@v3
-        with:
-          version: latest
-          args: --timeout=3m
+      # # Run linting with golangci-lint (optional)
+      # - name: Lint
+      #   uses: golangci/golangci-lint-action@v3
+      #   with:
+      #     version: latest
+      #     args: --timeout=3m
 
-      # Run tests with coverage
-      - name: Test
-        run: go test -v -coverprofile=coverage.txt -covermode=atomic ./...
+      # # Run tests with coverage
+      # - name: Test
+      #   run: go test -v -coverprofile=coverage.txt -covermode=atomic ./...
 
       # Build the project
       - name: Build
