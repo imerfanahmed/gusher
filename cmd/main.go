@@ -9,6 +9,7 @@ import (
 	"github.com/imerfanahmed/gusher/internal/cache"
 	"github.com/imerfanahmed/gusher/internal/config"
 	"github.com/imerfanahmed/gusher/internal/database"
+	"github.com/imerfanahmed/gusher/internal/types"
 	"github.com/imerfanahmed/gusher/internal/webhook"
 	"github.com/imerfanahmed/gusher/internal/websocket"
 

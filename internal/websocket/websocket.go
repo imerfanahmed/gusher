@@ -9,8 +9,8 @@ import (
 	"sync"
 
 	"github.com/imerfanahmed/gusher/internal/cache"
-	"github.com/imerfanahmed/gusher/internal/config"
 	"github.com/imerfanahmed/gusher/internal/logging"
+	"github.com/imerfanahmed/gusher/internal/types"
 	"github.com/imerfanahmed/gusher/internal/webhook"
 
 	"github.com/go-redis/redis/v8"
@@ -66,7 +66,7 @@ func Handler(db *sql.DB, redisClient *redis.Client) http.HandlerFunc {
 }
 
 // handleMessages processes incoming messages
-func handleMessages(conn *websocket.Conn, cfg config.AppConfig, socketID string) {
+func handleMessages(conn *websocket.Conn, cfg types.AppConfig, socketID string) {
 	defer conn.Close()
 	for {
 		_, message, err := conn.ReadMessage()
@@ -107,14 +107,14 @@ func handleMessages(conn *websocket.Conn, cfg config.AppConfig, socketID string)
 }
 
 // Helper functions
-func getAppConfig(db *sql.DB, redisClient *redis.Client, key string) (config.AppConfig, error) {
+func getAppConfig(db *sql.DB, redisClient *redis.Client, key string) (types.AppConfig, error) {
 	cfg, err := cache.FetchFromRedis(redisClient, key)
 	if err == nil {
 		return cfg, nil
 	}
 	cfg, err = fetchFromDatabase(db, key)
 	if err != nil {
-		return config.AppConfig{}, err
+		return types.AppConfig{}, err
 	}
 	if err := cache.StoreInRedis(redisClient, key, cfg); err != nil {
 		log.Printf("Failed to store app %s in Redis: %v", key, err)
@@ -122,14 +122,14 @@ func getAppConfig(db *sql.DB, redisClient *redis.Client, key string) (config.App
 	return cfg, nil
 }
 
-func fetchFromDatabase(db *sql.DB, key string) (config.AppConfig, error) {
-	var cfg config.AppConfig
+func fetchFromDatabase(db *sql.DB, key string) (types.AppConfig, error) {
+	var cfg types.AppConfig
 	err := db.QueryRow("SELECT id, `key`, secret FROM apps WHERE `key` = ?", key).
 		Scan(&cfg.AppID, &cfg.AppKey, &cfg.AppSecret)
 	if err == sql.ErrNoRows {
-		return config.AppConfig{}, config.ErrAppNotFound
+		return types.AppConfig{}, types.ErrAppNotFound
 	} else if err != nil {
-		return config.AppConfig{}, err
+		return types.AppConfig{}, err
 	}
 	return cfg, nil
 }

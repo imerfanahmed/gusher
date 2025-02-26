@@ -1,40 +1,30 @@
+// internal/config/config.go
 package config
 
 import (
-	"database/sql"
-	"errors"
-	"log"
-
-	"github.com/imerfanahmed/gusher/internal/cache"
-
-	"github.com/go-redis/redis/v8"
+    "database/sql"
+    "log"
+    "github.com/imerfanahmed/gusher/internal/types"
 )
 
-// AppConfig represents an application configuration
-type AppConfig struct {
-	AppID     string
-	AppKey    string
-	AppSecret string
-}
+// LoadAppConfigs loads app configurations from the database
+func LoadAppConfigs(db *sql.DB) ([]types.AppConfig, error) {
+    rows, err := db.Query("SELECT id, `key`, secret FROM apps")
+    if err != nil {
+        log.Printf("Error querying apps: %v", err)
+        return nil, err
+    }
+    defer rows.Close()
 
-var ErrAppNotFound = errors.New("app not found")
-
-// LoadAppConfigs loads app configurations into Redis
-func LoadAppConfigs(db *sql.DB, redisClient *redis.Client) {
-	rows, err := db.Query("SELECT id, `key`, secret FROM apps")
-	if err != nil {
-		log.Fatal("Error querying apps: ", err)
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var config AppConfig
-		if err := rows.Scan(&config.AppID, &config.AppKey, &config.AppSecret); err != nil {
-			log.Fatal("Error scanning app config: ", err)
-		}
-		if err := cache.StoreInRedis(redisClient, config.AppKey, config); err != nil {
-			log.Printf("Failed to store app %s in Redis: %v", config.AppKey, err)
-		}
-	}
-	log.Printf("Loaded app configurations into Redis")
+    var configs []types.AppConfig
+    for rows.Next() {
+        var config types.AppConfig
+        if err := rows.Scan(&config.AppID, &config.AppKey, &config.AppSecret); err != nil {
+            log.Printf("Error scanning app config: %v", err)
+            return nil, err
+        }
+        configs = append(configs, config)
+    }
+    log.Printf("Loaded app configurations from database")
+    return configs, nil
 }
