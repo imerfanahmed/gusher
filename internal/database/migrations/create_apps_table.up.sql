@@ -1,0 +1,5 @@
+CREATE TABLE apps (
+    id VARCHAR(255) PRIMARY KEY,
+    `key` VARCHAR(255) UNIQUE NOT NULL,
+    secret VARCHAR(255) NOT NULL
+);
