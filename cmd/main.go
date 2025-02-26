@@ -7,9 +7,7 @@ import (
 	"os"
 
 	"github.com/imerfanahmed/gusher/internal/cache"
-	"github.com/imerfanahmed/gusher/internal/config"
 	"github.com/imerfanahmed/gusher/internal/database"
-	"github.com/imerfanahmed/gusher/internal/types"
 	"github.com/imerfanahmed/gusher/internal/webhook"
 	"github.com/imerfanahmed/gusher/internal/websocket"
 
@@ -51,7 +49,7 @@ func main() {
 	}
 
 	// Load configurations
-	config.LoadAppConfigs(db, redisClient)
+	// config.LoadAppConfigs(db, redisClient)
 	webhook.LoadWebhookConfigs(db)
 
 	// Set up HTTP router
